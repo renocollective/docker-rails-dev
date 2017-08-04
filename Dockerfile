@@ -5,10 +5,8 @@ FROM ruby:2.3.1
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     bash \
     build-essential \
-    libpq-dev \
     nodejs \
     npm \
-    postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
     # Define where the application will live inside the image

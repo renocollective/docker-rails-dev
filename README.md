@@ -2,7 +2,7 @@
 A simple rails image for rails development
 
 ## Sample docker-compose.yml
-`
+```
 version: '3'
 
 services:
@@ -18,4 +18,4 @@ services:
      restart: always
     #  environment:
 
-`
+```

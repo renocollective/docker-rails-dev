@@ -30,7 +30,7 @@ services:
      build: ./
      volumes:
        - ../member-portal/:/app
-       - ../member-portal/box:/box
+       - ./box:/box
      ports:
        - "3000:3000"
      restart: always
@@ -40,7 +40,7 @@ services:
    box:
     image: busybox
     volumes:
-      - ../member-portal/box:/box
+       - ./box:/box
 
 volumes:
     box:

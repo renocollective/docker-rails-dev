@@ -10,7 +10,6 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     postgresql-client \
     libxml2-dev \
     libxslt-dev \
-    libiconv-dev \
     && rm -rf /var/lib/apt/lists/*
 
     # Define where the application will live inside the image
@@ -36,5 +35,7 @@ ENV BUNDLE_PATH /box
 ADD . $app
 
 COPY script/start.sh /start.sh
+
+ENTRYPOINT ["/start.sh"]
 
 CMD rails s -b 0.0.0.0

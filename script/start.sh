@@ -1,5 +1,10 @@
-#!/bin/bash
+#!/bin/sh
+set -e
+
+if [ -f /app/tmp/pids/server.pid ]; then
+  rm /app/tmp/pids/server.pid
+fi
 
 bundle check || bundle install
 
-bundle exec rails s -b 0.0.0.0
+exec bundle exec "$@"

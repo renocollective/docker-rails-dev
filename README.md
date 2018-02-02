@@ -1,41 +1,24 @@
 # Rails Dev
 A simple rails image for rails development
 
-## Sample docker-compose.yml
-```
-version: '3'
+## Usage
+Modify the docker-compose.yml paths to point at your rails app.
+Be sure the .env.local file is also correctly targeted.
 
-services:
+Sample .env.local file contents:
+```# dotenv .env file for environment variables
+#
+# each developer should make their own .env.local file using this .env file
+# as a guide
+#
+# .env.local files are not checked into the remote repo
+#
+# reference these attributes in code like this:
+# config.fog_directory  = ENV['S3_BUCKET']
 
-  db:
-    image: postgres:10.1
-    volumes:
-      - ./db_data:/var/lib/postgresql/data
-    ports:
-      - "3309:3306"
-    restart: always
-    env_file:
-      - ./.env.local
-
-  rails:
-    depends_on:
-      - db
-    links:
-      - db
-    #image: renocollective/rails
-    build: ../member-portal-docker
-    volumes:
-      - ./:/app
-      - box:/box
-    ports:
-      - "3000:3000"
-    restart: always
-    env_file:
-      - ./.env.local
-
-  box:
-   image: busybox
-   volumes:
-     - box:/box
-
-```
+S3_BUCKET=bogus-key-for-example
+POSTGRES_HOST=db
+POSTGRES_DB=member_portal
+POSTGRES_USER=member_portal
+POSTGRES_PASSWORD=somereallygreatpasswordthatsbetterthanthisone
+SECRET_KEY_BASE=insecure-secret_key_base```

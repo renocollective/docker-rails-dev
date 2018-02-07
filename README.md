@@ -28,4 +28,8 @@ SECRET_KEY_BASE=insecure-secret_key_base
 * To run rails in docker
 * ```docker-compose up``` or ```docker-compose up -d``` to not show console output.
 * DB Migrate: (can be run without rebooting container, just open a new terminal)
-* ```docker-compose run --rm rails rails db:migrate RAILS_ENV=development```
+* ```docker-compose run --rm -e "RAILS_ENV=development" rails rails db:migrate```
+* Tests:
+* ```docker-compose run --rm -e "RAILS_ENV=test" rails rake test```
+* Tests with DEBUG log level:
+* ```docker-compose run --rm -e "RAILS_ENV=test" -e"LOG_LEVEL=DEBUG" rails rake test```

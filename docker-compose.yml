@@ -26,7 +26,6 @@ services:
        - db
      links:
        - db
-     #image: renocollective/rails
      build: ./
      volumes:
        - ../member-portal/:/app

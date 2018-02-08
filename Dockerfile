@@ -36,6 +36,6 @@ ADD . $app
 
 COPY script/start.sh /start.sh
 
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["bash","/start.sh"]
 
 CMD rails s -b 0.0.0.0

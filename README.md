@@ -5,7 +5,8 @@ A simple rails image for rails development
 Modify the docker-compose.yml paths to point at your rails app.
 Be sure the .env.local file is also correctly targeted.
 
-Sample .env.local file contents:
+Sample .env.local file contents (needs at least these variables for this docker
+s, others may setup, others may be necessary for your rails app):
 ```# dotenv .env file for environment variables
 #
 # each developer should make their own .env.local file using this .env file
@@ -16,20 +17,20 @@ Sample .env.local file contents:
 # reference these attributes in code like this:
 # config.fog_directory  = ENV['S3_BUCKET']
 
-S3_BUCKET=bogus-key-for-example
 POSTGRES_HOST=db
 POSTGRES_DB=member_portal
 POSTGRES_USER=member_portal
 POSTGRES_PASSWORD=somereallygreatpasswordthatsbetterthanthisone
-SECRET_KEY_BASE=insecure-secret_key_base
 ```
 
 ## Usage
-* To run rails in docker
+* To run rails in docker. Be sure you're in the right directory with docker-compose.yml
 * ```docker-compose up``` or ```docker-compose up -d``` to not show console output.
 * DB Migrate: (can be run without rebooting container, just open a new terminal)
-* ```docker-compose run --rm -e "RAILS_ENV=development" rails rails db:migrate```
+* ```docker-compose run --rm rails rails db:migrate```
 * Tests:
 * ```docker-compose run --rm -e "RAILS_ENV=test" rails rake test```
 * Tests with DEBUG log level:
 * ```docker-compose run --rm -e "RAILS_ENV=test" -e"LOG_LEVEL=DEBUG" rails rake test```
+* Run rubocop:
+* ```docker-compose run --rm rails bundle exec rubocop```

@@ -1,6 +1,5 @@
 FROM ruby:2.3.1
 
-
 # Install essential linux packages
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     bash \
@@ -9,6 +8,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     nodejs \
     npm \
     postgresql-client \
+    libxml2-dev \
+    libxslt-dev \
     && rm -rf /var/lib/apt/lists/*
 
     # Define where the application will live inside the image
@@ -24,13 +25,17 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 # Install bundler
 RUN gem install bundler
 
-# Use the Gemfiles as Docker cache markers and run bundle install before copy over app src
-#COPY Gemfile Gemfile
-#COPY Gemfile.lock Gemfile.lock
+ENV app /app
 
+RUN mkdir $app
+WORKDIR $app
 
-#RUN bundle install --deployment
+ENV BUNDLE_PATH /box
 
-#RUN rails db:migrate
+ADD . $app
 
-CMD bundle install --deployment && rails db:migrate && rails s
+COPY script/start.sh /start.sh
+
+ENTRYPOINT ["bash","/start.sh"]
+
+CMD rails s -b 0.0.0.0
